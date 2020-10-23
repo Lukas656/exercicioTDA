@@ -1,0 +1,106 @@
+package notasturma;
+
+import java.util.Scanner;
+
+public final class NotasTurma {
+
+    private String alunos[], disciplinas[];   //vetores com os nomes dos alunos e das disciplinas
+    private float notas[][];   //matriz para guardar as notas dos alunos nas disciplinas
+    private int M, N;    //veja que M é a qtde. de alunos da turma e N é a qtde. de disciplinas
+
+    public static void main(String[] args) {
+        new NotasTurma();   // iniciamos o construtor da classe principal
+    }
+
+    public NotasTurma() {
+        leituraDeDados();
+        mostrarDadosDaTurma();
+        mostrarMediaCadaAluno();
+        mostrarMediaCadaDisciplina();
+        calcularMediaGeral();
+        //outras opções deste programa
+        //mostrarMediaCadaAluno();
+        //mostrarMediaCadaDisciplina();
+        //calcularMediaGeral();
+    }
+
+    public void leituraDeDados() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Digite a qtde. de alunos da turma: ");
+        M = sc.nextInt();
+        System.out.print("Digite a qtde. de disciplinas da turma: ");
+        N = sc.nextInt();
+
+        //agora já podemos alocar/reservar a memória que necessitamos para
+        //os vetores e para a matriz:
+        alunos = new String[M];
+        disciplinas = new String[N];
+        notas = new float[M][N];
+
+        //leitura dos nomes dos alunos
+        for (int i = 0; i < M; i++) {
+            System.out.print("Digite o nome do aluno " + (i + 1) + ": ");
+            alunos[i] = sc.next();
+        }
+
+        //leitura dos nomes das disciplinas:
+        for (int j = 0; j < N; j++) {
+            System.out.print("Digite o nome da disciplina " + (j + 1) + ": ");
+            disciplinas[j] = sc.next();
+        }
+
+        //vamos ler, por último, a matriz de notas:
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print("Digite a nota do aluno "  
+                        +  alunos[i]  +  " na disciplina "  +  disciplinas[j]  +  " : ");
+                notas[i][j] = sc.nextFloat(); 
+            }
+        }
+    } //fim da leitura de dados
+    
+    public void mostrarDadosDaTurma() {
+         System.out.println("\nDados cadastrados para esta turma: \n");
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
+    System.out.println(alunos[i] + ", " + disciplinas[j]  + ", " + notas[i][j]);
+            }
+        }        
+    }
+
+    private void mostrarMediaCadaAluno() {
+      System.out.println("\nDados cadastrados para cada aluno: \n"); 
+
+      for (int i = 0; i< M; i++)
+          for (int j = 0; j < N; j++) {
+         int soma = 0;
+           soma += notas[i][j];
+             System.out.println("Média do aluno " + (i+1)+ ", é :" + soma/N );
+          }        
+    }
+
+    private void mostrarMediaCadaDisciplina() {
+        System.out.println("\nDados cadastrados para cada disciplina: \n"); 
+
+      for (int i = 0; i< M; i++)
+      
+          for (int j = 0; j < N; j++) {
+            int soma = 0;
+           soma += notas[i][j];
+           
+             System.out.println("Média da Disciplina " + (j+1)+ ", é :" + soma/M );
+          }  
+    }
+
+    private void calcularMediaGeral() {
+         System.out.println("\nDados gerais: \n"); 
+
+      for (int i = 0; i< M; i++)
+      
+          for (int j = 0; j < N; j++) {
+            int soma = 0;
+           soma += notas[i][j];
+           
+             System.out.println("Média geral " + (j+1)+ ", é :" + soma/(M*N) );
+          }  
+} //fim da classe NotasTurma
